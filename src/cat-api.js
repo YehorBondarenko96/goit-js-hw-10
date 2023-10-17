@@ -4,6 +4,10 @@ axios.defaults.headers.common["x-api-key"] = "live_gONgQo0r8pRVrAhrA5QTR1Ww1FRbz
 
 
 const error = document.querySelector('.error');
+const loader = document.querySelector('.loader');
+
+error.classList.add("visually-hidden");
+loader.classList.add("visually-hidden");
 
 export const fetchBreeds = () =>
     axios.get("https://api.thecatapi.com/v1/breeds")

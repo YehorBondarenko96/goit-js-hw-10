@@ -1,7 +1,6 @@
 import {fetchBreeds, fetchCatByBreed} from "./cat-api";
 
 const breedSelect = document.querySelector('.breed-select');
-const loader = document.querySelector('.loader');
 const catInfo = document.querySelector('.cat-info');
 
 fetchBreeds()
@@ -16,18 +15,26 @@ function contentSelect (breeds){
             </option>`
         }
     ).join("");
-    console.log(breeds);
     breedSelect.innerHTML = item;
 };
 
 function responseFormatting (a) {
-    catInfo.prepend(a)
+    const itemInfo = a.map(
+        ({url, breeds:{0:{name, description, temperament}}}) => {
+            return `<img class = "img" src = '${url}' alt ='${name}'/>
+                    <div class = "text-info">
+                    <h1>${name}</h1>
+                    <p>${description}</p>
+                    <p><b>Temperament: </b>${temperament}</p>
+                    </div>`
+        }
+    ).join("");
+    catInfo.innerHTML = itemInfo;
 }
 
 breedSelect.addEventListener("change", () => {
 const breedId = breedSelect.value;
-console.log(breedId);
 fetchCatByBreed(breedId)
-.then((breed) => console.log(breed))
+.then((breed) => responseFormatting(breed))
 .catch((error) => console.log(error));
 });
