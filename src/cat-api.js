@@ -1,24 +1,31 @@
+import axios from "axios";
+
+axios.defaults.headers.common["x-api-key"] = "live_gONgQo0r8pRVrAhrA5QTR1Ww1FRbzow4GXfRe46tMqFj9qa5gaIVBGIl5OgXa2OU";
+
+
+const error = document.querySelector('.error');
+
 export const fetchBreeds = () =>
-    fetch("https://api.thecatapi.com/v1/breeds")
+    axios.get("https://api.thecatapi.com/v1/breeds")
     .then(
         (response) => {
-            if (!response.ok){
+            if (!response.data){
                 throw new 
-                Error(response.status);
+                Error(error.textContent);
             }
-            return response.json();
+            return response.data;
         }
     );
 
     export const fetchCatByBreed = (breedId) =>
-    fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
+    axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
     .then(
         (response) => {
-            if (!response.ok){
+            if (!response.data){
                 throw new
-                Error(response.status);
+                Error(error.textContent);
             }
-            return response.json();
+            return response.data;
         }
     );
     
