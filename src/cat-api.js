@@ -3,8 +3,10 @@ import axios from "axios";
 axios.defaults.headers.common["x-api-key"] = "live_gONgQo0r8pRVrAhrA5QTR1Ww1FRbzow4GXfRe46tMqFj9qa5gaIVBGIl5OgXa2OU";
 
 
-const error = document.querySelector('.error');
-const loader = document.querySelector('.loader');
+export const error = document.querySelector('.error');
+export const loader = document.querySelector('.loader');
+export const breedSelect = document.querySelector('.breed-select');
+export const catInfo = document.querySelector('.cat-info');
 
 error.classList.add("visually-hidden");
 loader.classList.add("visually-hidden");
@@ -32,5 +34,3 @@ export const fetchBreeds = () =>
             return response.data;
         }
     );
-    
-    

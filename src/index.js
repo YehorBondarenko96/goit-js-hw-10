@@ -1,10 +1,14 @@
-import {fetchBreeds, fetchCatByBreed} from "./cat-api";
+import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader} from "./cat-api";
 
-const breedSelect = document.querySelector('.breed-select');
-const catInfo = document.querySelector('.cat-info');
+
+breedSelect.classList.add("visually-hidden");
+loader.classList.remove("visually-hidden");
 
 fetchBreeds()
-.then((breeds) => contentSelect (breeds))
+.then((breeds) => {
+    breedSelect.classList.remove("visually-hidden");
+    loader.classList.add("visually-hidden");
+    contentSelect (breeds)})
 .catch((error) => console.log(error));
     
 function contentSelect (breeds){
@@ -33,8 +37,13 @@ function responseFormatting (a) {
 }
 
 breedSelect.addEventListener("change", () => {
+    loader.classList.remove("visually-hidden");
+    catInfo.classList.add("visually-hidden");
 const breedId = breedSelect.value;
 fetchCatByBreed(breedId)
-.then((breed) => responseFormatting(breed))
+.then((breed) => {
+    loader.classList.add("visually-hidden");
+    catInfo.classList.remove("visually-hidden");
+    responseFormatting(breed)})
 .catch((error) => console.log(error));
 });
