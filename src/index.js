@@ -1,4 +1,4 @@
-import {fetchBreeds} from "./cat-api";
+import {fetchBreeds, fetchCatByBreed} from "./cat-api";
 import axios from "axios";
 
 axios.defaults.headers.common["x-api-key"] = "live_gONgQo0r8pRVrAhrA5QTR1Ww1FRbzow4GXfRe46tMqFj9qa5gaIVBGIl5OgXa2OU";
@@ -22,3 +22,11 @@ function contentSelect (breeds){
     ).join("");
     breedSelect.innerHTML = item;
 };
+
+breedSelect.addEventListener("change", () => {
+const breedId = breedSelect.value;
+console.log(breedId);
+fetchCatByBreed(breedId)
+.then((breed) => catInfo.prepend(breed))
+.catch((error) => console.log(error));
+});
