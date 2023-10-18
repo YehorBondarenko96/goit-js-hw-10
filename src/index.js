@@ -2,7 +2,16 @@ import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, error
 
 // import SlimSelect from 'slim-select';
 
+const costomText = <option value="customPlaceholder" selected>Мій власний текст заповнювача</option>;
 
+function slimSelect (){ new SlimSelect({
+    select: breedSelect,
+    settings: {
+        placeholderText: 'Choose a breed',
+    },
+    showSearch: false,
+})
+};
 
 loader.textContent = "";
 
@@ -15,15 +24,15 @@ fetchBreeds()
 .then((breeds) => {
     breedSelect.classList.remove("visually-hidden");
     loader.classList.add("visually-hidden");
-    contentSelect (breeds)})
+    contentSelect (breeds);
+    slimSelect()
+})
 .catch(() => errorLoader());
     
 function contentSelect (breeds){
     const item = breeds.map(
         ({id, name}) => {
-            return `<option 
-            value = "${id}">${name}
-            </option>`
+            return `<option value = "${id}">${name}</option>`
         }
     ).join("");
     breedSelect.innerHTML = item;
@@ -55,8 +64,3 @@ fetchCatByBreed(breedId)
 .catch(() => errorLoader());
 });
 
-// const list = new SlimSelect({
-//     select: breedSelect,
-//     placeholder: 'Choose a breed',
-//     showSearch: false,
-// });

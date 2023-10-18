@@ -32,7 +32,6 @@ export const fetchBreeds = () =>
                 Error(errorLoader());
             } 
             return response.data;
-            
         }
     );
 
