@@ -1,15 +1,17 @@
-import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader} from "./cat-api";
+import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, errorLoader} from "./cat-api";
 
 
 breedSelect.classList.add("visually-hidden");
 loader.classList.remove("visually-hidden");
+error.classList.add("visually-hidden");
+
 
 fetchBreeds()
 .then((breeds) => {
     breedSelect.classList.remove("visually-hidden");
     loader.classList.add("visually-hidden");
     contentSelect (breeds)})
-.catch((error) => console.log(error));
+.catch(() => errorLoader());
     
 function contentSelect (breeds){
     const item = breeds.map(
@@ -45,5 +47,5 @@ fetchCatByBreed(breedId)
     loader.classList.add("visually-hidden");
     catInfo.classList.remove("visually-hidden");
     responseFormatting(breed)})
-.catch((error) => console.log(error));
+.catch(() => errorLoader());
 });

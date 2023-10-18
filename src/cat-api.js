@@ -8,8 +8,17 @@ export const loader = document.querySelector('.loader');
 export const breedSelect = document.querySelector('.breed-select');
 export const catInfo = document.querySelector('.cat-info');
 
-error.classList.add("visually-hidden");
+
 loader.classList.add("visually-hidden");
+
+export const errorLoader = () => {
+    breedSelect.classList.add("visually-hidden");
+    catInfo.classList.add("visually-hidden");
+    loader.classList.add("visually-hidden");
+    error.classList.remove("visually-hidden")
+};
+
+
 
 export const fetchBreeds = () =>
     axios.get("https://api.thecatapi.com/v1/breeds")
@@ -17,9 +26,10 @@ export const fetchBreeds = () =>
         (response) => {
             if (!response.data){
                 throw new 
-                Error(error.textContent);
-            }
+                Error(errorLoader());
+            } 
             return response.data;
+            
         }
     );
 
@@ -29,8 +39,11 @@ export const fetchBreeds = () =>
         (response) => {
             if (!response.data){
                 throw new
-                Error(error.textContent);
-            }
+                Error(errorLoader());
+            } else if (response.data.length === 0){
+                errorLoader();
+            } else {
             return response.data;
+            }
         }
     );
