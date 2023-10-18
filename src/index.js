@@ -1,5 +1,8 @@
 import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, errorLoader} from "./cat-api";
-import SlimSelect from 'slim-select';
+
+// import SlimSelect from 'slim-select';
+
+
 
 loader.textContent = "";
 
@@ -52,8 +55,8 @@ fetchCatByBreed(breedId)
 .catch(() => errorLoader());
 });
 
-const list = new SlimSelect({
-    select: breedSelect,
-    placeholder: 'Choose a breed',
-    showSearch: false,
-});
+// const list = new SlimSelect({
+//     select: breedSelect,
+//     placeholder: 'Choose a breed',
+//     showSearch: false,
+// });
