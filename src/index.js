@@ -1,5 +1,7 @@
 import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, errorLoader} from "./cat-api";
+import SlimSelect from 'slim-select';
 
+loader.textContent = "";
 
 breedSelect.classList.add("visually-hidden");
 loader.classList.remove("visually-hidden");
@@ -48,4 +50,10 @@ fetchCatByBreed(breedId)
     catInfo.classList.remove("visually-hidden");
     responseFormatting(breed)})
 .catch(() => errorLoader());
+});
+
+const list = new SlimSelect({
+    select: breedSelect,
+    placeholder: 'Choose a breed',
+    showSearch: false,
 });
