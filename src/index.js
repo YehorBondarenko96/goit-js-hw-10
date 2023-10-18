@@ -1,7 +1,5 @@
 import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, errorLoader} from "./cat-api";
 
-// import SlimSelect from 'slim-select';
-
 const customText = '<option data-placeholder="true">Choose a breed</option>';
 breedSelect.innerHTML = customText;
 
