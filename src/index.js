@@ -2,7 +2,8 @@ import {fetchBreeds, fetchCatByBreed, breedSelect, catInfo, error, loader, error
 
 // import SlimSelect from 'slim-select';
 
-const costomText = <option value="customPlaceholder" selected>Мій власний текст заповнювача</option>;
+const customText = '<option data-placeholder="true">Choose a breed</option>';
+breedSelect.innerHTML = customText;
 
 function slimSelect (){ new SlimSelect({
     select: breedSelect,
@@ -35,7 +36,7 @@ function contentSelect (breeds){
             return `<option value = "${id}">${name}</option>`
         }
     ).join("");
-    breedSelect.innerHTML = item;
+    breedSelect.insertAdjacentHTML("beforeend", item);
 };
 
 function responseFormatting (a) {
